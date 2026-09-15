@@ -1,32 +1,37 @@
-# Singular Value Decomposition (SVD) Exploration: Theory, Implementation, and Applications
+# Singular Value Decomposition and the Moore–Penrose Pseudoinverse
 
-## Overview
-This project is a comprehensive exploration of Singular Value Decomposition (SVD), a cornerstone of linear algebra with vast applications in data science, signal processing, and machine learning. I independently implemented SVD to investigate its power in low-rank approximation and dimensionality reduction, demonstrating both theoretical and practical aspects.
+A focused linear-algebra notebook that decomposes matrices with NumPy and
+constructs the Moore–Penrose pseudoinverse from the singular factors. The goal
+is to make the mechanics of SVD inspectable before using it in larger machine
+learning or signal-processing systems.
 
-## Mathematical Framework
-For any \(m \times n\) matrix \(A\), SVD expresses it as:
-\[
-A = U \Sigma V^T,
-\]
-where:
-- \(U\) is an \(m \times m\) orthogonal matrix,
-- \(\Sigma\) is an \(m \times n\) diagonal matrix with non-negative singular values,
-- \(V\) is an \(n \times n\) orthogonal matrix.
+## What it covers
 
-The energy contained in \(A\) is concentrated in the top \(k\) singular values, which can be used to form a low-rank approximation:
-\[
-A_k = U_k \Sigma_k V_k^T.
-\]
-I studied the trade-off between compression and reconstruction fidelity by measuring the Frobenius norm of the error \( \|A - A_k\|_F \).
+- The factorization \(A=U\Sigma V^T\)
+- Singular values and orthogonal factors
+- Pseudoinverse construction by inverting nonzero singular values
+- Numerical checks on small matrices
 
-## Implementation & Experimentation
-- **Implementation:** Using NumPy, I computed the SVD and verified the orthogonality of \(U\) and \(V\).
-- **Visualization:** I compared the original matrix with its low-rank approximations, illustrating how a few singular values capture most of the important structure.
-- **Analysis:** By varying \(k\), I quantified the reconstruction error, demonstrating the practical utility of SVD in data compression and noise reduction.
+## Quick start
 
-## Usage
-- **Prerequisites:** Python, NumPy, Matplotlib.
-- **Run the Notebook:** Open `Singular_Value_Decomposition.ipynb` and execute the cells.
-- **Customization:** Modify \(k\) to explore different low-rank approximations and observe their impact on reconstruction quality.
+```bash
+git clone https://github.com/takakhoo/SVD-Calculator.git
+cd SVD-Calculator
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install -r requirements.txt
+jupyter lab "Singular Value Decomposition.ipynb"
+```
 
----
+[Open the executed notebook](Singular%20Value%20Decomposition.ipynb)
+
+## Verification
+
+The example reconstructs an input matrix from its factors and compares the
+custom pseudoinverse calculation with NumPy's reference implementation. The
+notebook is deliberately small so each operation can be checked directly.
+
+## Scope
+
+This is an educational calculation, not a replacement for the numerically
+robust routines in `numpy.linalg` or `scipy.linalg`.
